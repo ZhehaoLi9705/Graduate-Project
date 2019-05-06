@@ -1,0 +1,1021 @@
+\documentclass[tsinghuacite]{HustGraduPaper}
+%进行个人信息设置
+\title{经济系统中的资金动力学} %论文题目
+\author{李哲浩} %作者姓名
+\date{\today} %日期，默认当日
+\school{物理学院} %院系名称
+\classnum{物理学严济慈英才班} %专业班级
+\stunum {U201510222} %学号
+\instructor{吕京涛} %指导教师姓名
+
+%添加自己要用的其他宏包
+\usepackage{xltxtra}
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{enumitem} 
+\usepackage[justification=centering]{caption}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tabularx}
+
+
+\begin{document}
+	%生成标题页 \maketitle[可选参数]
+	%可选参数：
+	%logo color=green/black 华中科技大学字样的颜色，绿色或者黑色，默认绿色
+	%line length=12em 填写信息处横线的长度，默认12em
+	%line font=huawenzhongsong 填写信息的字体，默认huawenzhongsong
+	\maketitle
+	
+	%生成声明与授权书页 \statement[可选参数]
+	%可选参数：
+	%confidentiality=yes/no/true/false/empty 是否保密，yes/true为保密；no/false为不保密，empty为不填，默认为empty
+	%year=5 保密年数，默认为空
+	\statement
+	
+	\clearpage %结束上一页
+	\pagenumbering{Roman} %摘要页码为大写罗马数字
+	
+	%填写中文摘要内容和关键字
+	\begin{cnabstract}{Boltzmann-Gibbs分布；时间反演对称性；税收}
+		
+		本文从孤立系统中的资金满足Boltzmann-Gibbs分布出发，首先将统计力学理论应用的范围推广到了开放系统这一更加贴合实际情况的情形，然后通过Boltzmann方程探讨了Botlzmann-Gibbs分布与时间反演对称性的关系，最后提出了两种税收模型，为现实社会中的财富结构优化提供了新的方向。
+		
+		
+	\end{cnabstract}
+	
+	
+	%填写英文摘要内容和关键字
+	\begin{enabstract}{Boltzmann-Gibbs Distribution; Time-Reversal Symmetry; Tax}
+		
+		Starting from the Boltzmann-Gibbs distribution of funds in an isolated system, this paper extends the application of statistical mechanics theory to the more realistic situation of open systems, and then discusses the relation between Botlzmann-Gibbs distribution and time-reversal symmetry through Boltzmann eqution. Finally, we proposed two tax models, which provide new direction for the optimization of wealth structure in the real society.
+		
+	\end{enabstract}
+	
+	%生成目录 \tableofcontents[可选参数]
+	%可选参数：
+	%pagenum=yes/no/true/false 目录是否显示页码，默认为false
+	%toc in toc=yes/no/true/false 目录中是否有目录及其页码，默认为false
+	%level=4 目录级数，默认是4，即显示到subsubsubsection
+	%section indent=0em 目录第一级的缩进，默认是0em
+	%subsection indent=1.5em 目录第二级的缩进，默认是1.5em
+	%subsubsection indent=3.8em 目录第三级的缩进，默认是3.8em
+	%subsubsubsection indent=7em 目录第四级的缩进，默认是7em
+	%paragraph indent=11em 目录第五级的缩进，默认是11em
+	%subparagraph indent=13em 目录第六级的缩进，默认13em
+	%indent=normal/noindent/hustnoindent/sameforsubandsubsub 快速缩进设置，具体见文档
+	%dot sep=4.5 目录点间距，默认4.5
+	%section dot sep=4.5 目录第一级的点间距，默认是4.5
+	%subsection dot sep=4.5 目录第二级的点间距，默认是4.5
+	%subsubsection dot sep=4.5 目录第三级的点间距，默认是4.5
+	%subsubsubsection dot sep=4.5 目录第四级的点间距，默认是4.5
+	%paragraph dot sep=4.5 目录第五级的点间距，默认是4.5
+	%subparagraph dot sep=4.6 目录第六级的点间距，默认是4.5
+	%请注意在合适的位置放置\pagenumbering{numstyle}使用新的页码
+	\tableofcontents
+	
+	\clearpage%结束上一页
+	\pagenumbering{arabic} %正文页码为阿拉伯数字
+	
+	%正文内容从这里开始
+	\section{引论}
+	
+		\subsection{研究来源}
+		
+			本文研究的主题是经济系统中的资金动力学，这一灵感的来源是基于A. Dragulescu和Victor M. Yakovenko在2000年所做的讲座，在将近20年前的当时经济物理学已然成为一个受欢迎的主题。经济物理学是一门新的跨学科研究领域，它将统计物理学的方法应用于经济学和金融学的问题。 “经济物理学”一词最初由理论物理学家尤金·斯坦利于1995年在复杂系统动力学会议上引入，该会议在加尔各答举行，作为在中国STATPHYS-19会议的卫星会议\cite{chatterjee2007econophysics}\cite{carbone2007we}。 经济物理学的出现和发展开辟了新的物理学研究领域，Stanley等人认为“大量的人类行为“ （例如，可以通过经济指标测量的行为）可能符合尺度规律，而尺度规律已被证明有助于描述由大量非生物组成的系统\cite{stanley1996anomalous}。随后，世界范围内第一次经济物理学会议便被组织召开了——1997年布达佩斯经济物理国际工作室和1998年国际经济物理学和统计金融研讨会\cite{carbone2007we}。在这之后，Mantegna和Stanley编著的《经济物理学概论》也随即出版\cite{stanley1996anomalous}。
+			
+			“经济物理学”这一名称是通过类比其他物理交叉学科的术语引入的，比如天体物理学，地球物理学和生物物理学，它们各自描述了物理学在不同领域的应用。 但不同的是，即便是生物物理学——研究生物体和生命机理的学科，但它们的研究对象仍然遵守物理定律。 然而，经济物理学并没有将物理定律（如牛顿定律或量子力学）应用于人类。 它使用统计物理学中开发的数学方法来研究由大量人类组成的复杂经济系统的统计特性。 因此，它可以被视为应用概率论的一个分支。 然而，统计物理学在其重点，方法和结果方面与数学统计学明显不同。
+			
+			源于物理学作为定量科学，经济物理学强调对大量经济和金融数据的定量分析，随着计算机和互联网的引入，这些数据越来越多。 经济物理学将自己与政治经济学的冗长，叙事和意识形态风格区分开来，并且更加注重计量经济学的重点。 研究大量相互作用的经济因素的数学模型，经济物理学与基于代理的建模和模拟有很多共同点。 相应地，它与传统经济学的代表-代理方法相距甚远，传统经济学根据定义通常忽略了经济的统计和异质方面。
+	
+			当现代经济物理学在20世纪90年代中期开始时，这一领域主要的研究集中在金融市场的分析上。 不久之后，出现了另一个更接近经济而不是金融的方向。 它研究社会中资金，财富和收入的概率分布，并与研究社会不平等的经济学研究的长期研究重叠。许多经济学文献中\cite{gibrat1931ingalits}\cite{kalecki1945gibrat} 都使用随机过程来描述个人财富或收入的动态过程，并推导出它们最终的不变概率分布。 人们称这种方法为单体方法，因为每个经济主体都会被独立地考虑其财富和收入波动。 然而，受Boltzmann气体动理论的启发，经济物理学家引入了另一种双体相互作用的方法，即众多代理人之间进行配对交易，在这过程中资金从一个代理人转移到另一个代理人。这就类似于在经典理想气体模型中，气体分子发生弹性碰撞导致动能转移。上述过程分别满足资金守恒和能量守恒。
+	
+			最早也是最成功的将气体动理论应用于研究经济学系统中资金分布的是A. Dragulescu和V.M. Yakovenko\cite{dragulescu2000statistical}，他们在《Statistical Mechanics of Money》一文中指出， 统计力学和经济学研究的对象都是大系统，在物理学中是大量原子或分子的集合，而在经济学中是大量经济个体的集合。统计力学中关于理想气体分子系统热平衡的基本定律是Boltzmann-Gibbs定律，它表明能量$\epsilon$的概率分布是$P(\epsilon) = C e^{- \epsilon/T}$，其中$T$是温度，$C$是归一化常数\cite{wannier1987statistical}。 教科书推导Boltzmann-Gibbs定律\cite{wannier1987statistical}所必需的主要因素是能量守恒\cite{tsallis1988possible}。 因此，可以概括地说，大型统计系统中的任何守恒的物理量在达到平衡态时都应该具有指数概率分布，即Boltzmann-Gibbs分布\cite{dragulescu2000statistical}。而在理想的经济学系统中，我们可以假定资金在转移过程中始终是守恒的，那么通过这样简单的类比，我们可以推断在这样的经济系统中，平衡时的资金分布应该同样满足Boltzmann-Gibbs分布。
+
+		\subsection{研究目的}
+
+
+		这项研究的目的和意义在于，通过将经济学研究对象和物理学研究对象作对比，我们可以直接将发展非常成熟的统计力学理论应用于解释经济学现象以及建立相应的经济学模型。在传统的经济学中，经济学家研究资金、财富和收入分布的主要方式是通过先行进行样本调查，了解民众的收入和财富状况，再根据调查得到的分布数据进行拟合，进而根据拟合结果进行分析，从而建立数学模型或者数学方程，来解释调查所得到的数据。这一方法非常类似于传统物理学的研究，即——先通过实验得到实验现象，再将现象量化形成数据，再对数据进行分析拟合，然后建立数学解析式或方程来归纳所得到的实验现象，最后再进行实验，检验理论与实验在不同精度上符合的程度。
+	
+			事实上，在20世纪以前，物理学都是通过这样的方法论蓬勃发展起来的，但是到了20世纪，物理学，尤其是基础物理学，如粒子物理等发展的复杂程度使得人们难以通过实验$\rightarrow$理论的方法来进行研究。随之狭义相对论的建立，爱因斯坦认识到，要进一步建立更普适的引力理论，单纯的试图从实验去归纳出理论的方法是行不通的，实验并不总是那么可靠。后来，爱因斯坦找到了对称性这一绝对可靠的东西。于是，爱因斯坦在物理学的研究方式上来了一场革命，即——他先通过观察分析找到一个十分可靠的对称性，然后要求新的理论具有这种对称性，从而直接从数学上推到出它的方程，再用实验数据来验证他的理论是否正确。至此，原来的实验$\rightarrow$理论$\rightarrow$对称性的研究方法变成了对称性$\rightarrow$理论$\rightarrow$实验，这一重要变革意味着对称性从原来理论的副产品变成了决定理论的核心，实验研究则从原来的归纳理论的基础成了验证理论的工具。
+	
+			类似的，本次研究的意义在于在一定程度上颠覆了经济学部分领域的研究方式，从原来的调查$\rightarrow$理论转变为现在的理论$\rightarrow$调查。而在本研究中的理论，是通过类比物理学中的经典气体动理论而直接嫁接得到的。事实上，如果我们再进一步思考，我们会发现，在研究社会系统中的资金分布时，如果我们约束系统总的资金量不变，同时规定相应的资金交换规则，我们可以从中找到，这样的一个系统中蕴含着一个对称性——“资金量”实际上是一个守恒量，与物理系统中的能量一样，并且，资金交换这一动力学过程在一定条件下可以满足时间反演对称性。因此从根本上讲，我们将统计力学的理论应用于这一经济学模型，实际上还是用到了对称性$\rightarrow$理论$\rightarrow$实验这一思想作为指导。
+	
+			因此，总的来说这项研究的目的和意义不在于应用统计力学理论来解决经济学问题，而在于给经济学提供了一个全新的方法论，这将有助于指导经济学研究的更进一步发展。本文所介绍的经济系统中的资金动力学模型只是作为这一新方法论的例子，有助于我们更好的理解并运用这一方法论。
+		
+		
+		\subsection{研究的现状及趋势}
+
+			这一方向的研究迄今为止已有四大主流模型。分别为A. Dragulescu和V.M. Yakovenko所建立的基本简化模型，Xi, Ding和Wang的负债改进模型，Chatterjee和Chakrabarti等人的财富模型，以及从另一个角度切入的Bouchaud和Mézard提出的财富演化模型。
+	
+			\paragraph{基本模型与负债模型}
+			
+			2000年A. Dragulescu和V.M. Yakovenko建立了第一个基本的模型，该模型规定系统中总的资金量是恒定的，资金交换的过程满足资金量守恒，且不允许经济个体负债\cite{dragulescu2000statistical}。在这样的一个基本假定下，通过蒙特卡洛模拟，该系统的资金分布最终收敛于Boltzmann-Gibss分布。在这样的一个模型基础上，A. Dragulescu和V.M. Yakovenko又建立了允许负债模型和允许公司存在模型\cite{dragulescu2000statistical}，这两个模型更加贴近现代经济社会的真实情况，而计算机的拟合结果表明，这两个模型仍然满足指数分布。
+	
+			\paragraph{负债改进模型}
+			
+			进一步，Xi, Ding和Wang修改了允许负债模型，将存款准备金与社会总体允许负债规模挂钩，从而设定了系统总体的允许负债下限，而不是像A. Dragulescu和V.M. Yakovenko模型中简单的将每个个体赋予一个负债下限。这一改变似乎更合乎实际，合乎银行作为一个体向另一个经济个体的借贷过程。
+	
+			\paragraph{财富模型}
+			
+			Chatterjee和Chakrabarti，以及Ausloos和Pekalski等人进一步将研究对象从资金分布推广到资产分布\cite{chakraborti2001self} \cite{chatterjee2006kinetic} \cite{ausloos2007model}，他们首先考虑了资金+单个股票的资产模型。在该财富模型中，资金量和股票数均是守恒的。资金通过股票的买卖来交换，每个经济个体的财富定义为$w_i = m_i + p s_i$，其中p为股票的价格，$m_i$和$s_i$分别为第$i$个经济个体具有的资金量和股票数目。通过运用马尔可夫过程进行分析，并经过计算机模拟，这一模型的静态财富概率分布服从\eqref{eq1}的Gamma分布，其中$m^{\beta}$为幂律因子。
+	
+			\begin{equation}
+				P(m) = c m^{\beta} e^{- m /T}  \label{eq1}
+			\end{equation}
+	
+			\paragraph{财富演化模型}
+			
+			与此同时，Bouchaud和Mézard曾提出基于随机过程的财富模型\cite{bouchaud2000wealth}。他们在模型中假定经济个体$i$的财富$w_i$是会随着时间演化的，演化规律服从如下的随机微分方程，
+	
+			\begin{equation}
+				\frac{d w_i}{dt} = \eta_i (t) w_i + \sum_{j (\neq i) } J_{ij} w_j - \sum_{j (\neq i) } J_{ji} w_i \label{eq2}
+			\end{equation}
+	
+			\vspace{2em}
+	
+			而我们所熟悉的Boltzmann方程的形式如下，
+	
+			\begin{equation}
+				\frac{\partial f}{\partial t} = \left( \frac{\partial f}{\partial t} \right)_{force} + \left( \frac{\partial f}{\partial t} \right)_{diffuse} + \left( \frac{\partial f}{\partial t} \right)_{collide} \label{eq3}
+			\end{equation}
+	
+			\vspace{2em}
+	
+			通过对比我们发现，这一整个随机微分方程实际上是缺少外力项的Boltzmann方程的离散版本。方程\eqref{eq2}中第一项的$\eta_i (t)$是一个均值为$<\eta>$，方差为$2 \sigma^2$的高斯随机变量，这一项对应着Boltzmann方程的扩散项，在该模型中代表着个体财富随着时间变化随机增加或减少。第二项和第三项整体描述了两个经济个体之间财富的转移，或者说两体之间的相互作用——毫无疑问，这两项正是Boltzmann方程中的碰撞项。
+	
+			首先将方程进行平均场近似，再解简化后的随机微分方程，Bouchaud和Mézard指出财富演化模型的中的财富概率分布满足Fokker-Planck方程，即
+	
+			\begin{equation}
+				\frac{\partial P}{\partial t} = \frac{\partial [ J(\tilde{w} - 1) + \sigma^2 \tilde{w}  ]P }{\partial \tilde{w} } + \sigma^2 \frac{\partial}{ \partial \tilde{w} } \left( \tilde{w}   \frac{\partial \tilde{w} P}{\partial \tilde{w}}   \right)  \label{eq4}
+			\end{equation}
+	
+			\vspace{2em}
+	
+			这一概率方程的静态解为
+	
+			\begin{equation}
+				P(\tilde{w}) = c e^{- J / \sigma^2 \tilde{w}}  / \tilde{w}^{2 + J/\sigma^2}  \label{eq5}
+			\end{equation}
+	
+			\vspace{2em}
+	
+			显然，\eqref{eq5}所示的分布与Boltzmann-Gibss分布和Gamma分布大为不同，事实上，\eqref{eq5}所描绘的是一个尾部（$\tilde{w}$很大时）具有幂律分布特征，头部（$\tilde{w}$很小时）具有尖锐截断的近似指数分布。
+	
+	
+			自从将统计力学应用到研究经济学中的社会资金，财富和收入分布这一领域开辟后，迄今为止的进一步研究普遍都是将模型朝着更贴近实际经济系统改进，例如允许经济个体负债，在经济系统中设置公司这一特殊经济个体。再比如，将资产和资金同时纳入模型，一并考虑财富分布情况。还有的直接调取社会普查得到的国民收入分布情况，拿现有的经验数据拟合出分布形式，并与Boltzmann-Gibbs分布和幂律分布比较分析，解释现有数据。
+	
+			显然，以上这些改进使得研究方向不再是经济物理，而是越来越偏向传统计量经济学的研究领域。更有甚的研究，背离了理论指导实验的方法论思想，转而回到传统的经济学研究方式——用实证数据来反推理论，寻找理论解释。本人认为，理论指导实验这一方法论还有很大的发挥空间，最初的模型只是单纯的考虑了在孤立系统中的情况——即系统没有资金流入流出，也没有经济个体迁移，而事实上，我们完全可以通过继续类比热力学系统，推导开放系统中资金分布的情况。因此，本文在\autoref{sec:isolated_system}重现了基础模型且进行了详细的证明之后，在\autoref{sec:beyond_isolated}将孤立的经济系统推广到封闭系统，乃至开放系统，同时使用理论来预测结果，并通过蒙特卡洛模拟来验证理论。与此同时，本文在\autoref{sec:time_symmetry}充分讨论了时间反演对称性与Boltzmann-Gibbs分布的关系，随后在\autoref{sec:non_boltzmann}演示了不服从Boltzmann-Gibbs分布的经济系统。最后利用了时间反演对称性的特性，在\autoref{sec:tax_model}建立了更加合理公平的税收模型，这一模型对社会财富地更有效优化有着一定的指导意义。
+
+
+
+	\newpage
+	
+	
+	\section{经济系统中的Boltzmann-Gibbs分布}\label{sec:isolated_system}
+	
+		\subsection{孤立系统}
+	
+			首先，让我们来考虑一个孤立的经济系统，这个经济系统是有$N \gg 1$个独立的个体组成，这些个体可能是个人，也可能是公司或者组织，同时我们限定个体的数量不随时间变化，即系统中没有个体的加入也没有经济个体的离开。此外，我们假设这一系统的总资金量为$M$，并约定没有内部资金的流出也没有外部资金的流入，即系统的总资金量$M$是守恒的。每个个体$i$都拥有一些资金$m_i$，用于某些经济活动，例如购买商品或者支付某种服务的费用，然而我们对个体使用资金的方式并不在意。在本文中，我们将一切经济活动抽象出来，剥离出他们的具体形式，只关心资金在个体之间的流动，研究这种资金流动对系统中个体拥有的资金分布的影响。如文献\cite{ispolatov1998wealth}所述，我们研究的所资金流动是通过两体相互作用实现的，即在任意时间点$t$，经济个体$i$和$j$之间发生相互作用，结果是一定量的资金$\Delta m$易手。用数学语言描述如下，
+		
+			\begin{equation}
+				[m_i, m_j] \rightarrow [m_{i}^{'}, m_{j}^{'}] = [m_i - \Delta m, m_j + \Delta m]   \label{eq6}
+			\end{equation}
+			
+			\vspace{1.5em}  
+			
+			注意到在这笔交易中，个体$i$和$j$的总资金量是守恒的，这就类似于两个理想气体分子之间的弹性碰撞，他们的总能量是守恒的。此外，在这一模型中我们限定个体不允许负债，即每个个体拥有的资金量都是非负的：$m_i \geq 0$，类似条件也适用于气体分子的动能：$\epsilon_i \geq 0$。事实上，当我们简单的允许负债时，这一孤立系统最终的资金分布曲线相比与不允许负债的模型，只产生了一些平移，两者的分布形式是相同的\cite{dragulescu2000statistical}。
+			
+			下一步，我们引入该孤立系统达到平衡时的资金量概率分布函数$P(m)$，其中$P(m)$的具体形式可以类比于理想气体分子的能量在平衡态的分布得出\cite{wannier1987statistical}。然而，在得出资金分布函数$P(m)$的具体形式之前，让我们类比热力学系统，在这一经济系统中引入有效温度$T_m$这一概念。
+			
+			
+			\subsubsection{经济系统的有效温度}
+			
+			我们考虑两个仅可以交换资金量而不交换其他东西的经济系统，这两个系统彼此间有种某种接触使他们可以交换资金，然而这两个系统都不与除对方之外的系统交换任何东西。假设第一个系统的资金量为$M_1$，第二个系统的资金量为$M_2$。由于这两个系统不能语任何其他系统交换资金，因此可假定两者总资金量$M = M_1 + M_2$为常数。因此，仅知道$M_1$的值便可以确定两个系统的宏观态，即宏观资金量。与此同时，这两个系统各自处于许多可能的微观态，假设第一个系统可以处于$\Omega_1 (M_1)$个微观态中的任何一个，第二个系统处于$\Omega_2 (M_2)$个微观态的任一个，由于两个系统是相互独立的，因此整个系统可以处于$\Omega_1 (M_1) \Omega_2 (M_2)$个微观态中的任一个。
+			
+			\vspace{1.5em}  
+			
+			\begin{generalfig}[htb]{两个系统仅能在它们之间交换资金}{fig:two_system}
+				\includegraphics[width=0.5\textwidth]{Figures/two_system.png}
+			\end{generalfig}
+			
+			\vspace{1.5em}  
+			
+			由于这两个系统可以交换资金量，我们假设将它们在经过足够长的时间后，最终能达到某种平衡，这时$M_1$和$M_2$已达到确定的值。我们可以合理的认为：整个系统最终会选择一个使微观态数取最大值的宏观态。这一观点是基于大数定律和以下的几个假设：
+			
+			\begin{enumerate}
+				\item 均匀分布假设：系统的每一个可能的微观态是同等可能出现的；
+				
+				\item 连续变化假设：系统的内部动力学使得系统的微观态是连续变化的；
+				
+				\item 各态遍历假设：经过足够长的时间，系统会遍历所有可能的微观态且经历每个态的时间相同；
+				
+			\end{enumerate}
+			
+			因此，达到平衡时，这两个系统之间资金量最概然的分割应该是使$\Omega_1 (M_1) \Omega_2 (M_2)$取最大值的分割；与此同时，达到平衡后，$\Omega_1 (M_1) \Omega_2 (M_2)$的取值应该不发生变化，即$\Omega_1 (M_1) \Omega_2 (M_2)$对资金量$M_1$或$M_2$的微分应该为0
+			
+			\begin{equation}
+				\frac{d}{d M_1} ( \Omega_1 (M_1) \Omega_2 (M_2) ) = 0.  \label{eq7}
+			\end{equation}
+			
+			\vspace{1.5em}  
+			
+			利用微分的乘法法则，
+			
+			\begin{equation}
+				\Omega_2 (M_2) \frac{d \Omega_1 (M_1) }{d M_1}  + \Omega_1 (M_1) \frac{d \Omega_2 (M_2) }{d M_2} \frac{d M_1}{d M_2}  = 0. \label{eq8}
+			\end{equation}
+			
+			\vspace{1.5em}  
+			
+			由于$M = M_1 + M_2 = Constant$，这意味着$d E_1 = - d E_2$，即
+			
+			\begin{equation}
+				\frac{d E_1}{d E_2} = -1, \label{eq9}
+			\end{equation}
+			
+			\vspace{1.5em}  
+			
+			于是方程\eqref{eq8}变为
+			
+			\begin{equation}
+				\frac{1}{\Omega_1} \frac{d \Omega_1}{d E1} - \frac{1}{\Omega_2} \frac{d \Omega_2}{d E2} = 0, \label{eq10}
+			\end{equation}
+			
+			\vspace{1.5em}  
+			
+			因此，
+			
+			\begin{equation}
+				\frac{d \ln \Omega_1}{d E1} = \frac{d \ln \Omega_2}{d E2}. \label{eq11}
+			\end{equation}
+			
+			\vspace{1.5em}  
+			
+			上式这一条件定义了总资金量$M$在两个经济系统之间最可能的分割，因为这一条件使得总微观态数$\Omega_1 (M_1) \Omega_2 (M_2)$取最大值。现在，类比热力学系统，我们将这种资金量的分割称为“两个经济系统处于相同的有效温度”，我们定义如下的{\bfseries 有效温度$T_m$}		
+			
+			\begin{equation}
+				\frac{1}{T_m} = \frac{d \ln \Omega}{d M}. \label{eq12}
+			\end{equation}
+			
+			\subsubsection{资金量的概率分布}
+			
+			现在我们探讨孤立的经济系统，在达到平衡时，资金在个体之间服从什么形式的分布。同样，我们现在依然考虑两个系统，它们与之前一样的方式耦合，使得这两者之间可以交换资金量。不过这次，其中一个系统拥有资金量非常大，我们称之为{\bfseries 金库}(Cash Reservoir)。它是如此之大，即便使得你从金库中提取相当多的资金，它仍然可以保持它的有效温度$T_m$基本不变。另一个是资金量较小的系统，我们称之为{\bfseries 个体}(individual)。
+			
+			我们现在规定，对于系统的每个允许拥有的资金量，仅有一个微观态与之对应，因此系统的微观态数$\Omega_{agent}$恒为1。在这里，我们规定整个系统的总资金量为$M$，金库的资金量为$M-m$，个体的资金量取为$m$，如下图所示。
+			
+			\vspace{1.5em} 
+			
+			\begin{generalfig}[htb]{有效温度为$T_m$的金库与一个个体相联系}{fig:cash_reservoir}
+				\includegraphics[width=0.4\textwidth]{Figures/cash_reservoir.png}
+			\end{generalfig}
+			
+			\vspace{1.5em}  
+	
+			因此个体拥有资金$m$的概率$P(m)$与金库可及的微观态数$\Omega_{res}$和个体可及的微观态数$\Omega_{ind}$的乘积成正比，即
+			
+			\begin{equation}
+				P(m) \propto \Omega_{res}(M-m) \times 1. \label{eq13}
+			\end{equation}
+	
+			\vspace{1.5em}
+	
+			由于我们已知$\ln \Omega$与有效温度的关系\eqref{eq12}，且因为$m \ll M$，故我们可以对$\ln \Omega(M-m)$在$m=0$附近做泰勒展开，展开到一阶，我们得到
+			
+			
+			\begin{equation}
+				\ln \Omega(M-m) = \ln \Omega(M) - \frac{d \ln \Omega(M)}{dM} m + \cdots \label{eq14}
+			\end{equation}
+			
+			\vspace{1.5em}
+	
+			现在利用方程\eqref{eq12}，则有
+			
+			\begin{equation}
+				\ln \Omega(M-m) = \ln \Omega(M) -  \frac{m}{T_m} + \cdots \label{eq15}
+			\end{equation}
+			
+			\vspace{1.5em}
+	
+			其中，$T_m$是金库的有效温度。事实上，我们可忽略展开中的高阶小量，只保留一阶展开，那么将\eqref{eq15}等式两边积分，得到
+			
+			\begin{equation}
+				\Omega(M-m) = \Omega(M) e^{-m / T_m}  \label{eq16}
+			\end{equation}
+			
+			\vspace{1.5em}
+			
+			再利用\eqref{eq13}的结论，我们最后得到描述孤立系统平衡时资金概率分布的结果：
+			
+			\begin{equation}
+				P(m) \propto  C e^{-m / T_m}  \label{eq17}
+			\end{equation}
+			
+			\vspace{1.5em}
+	
+			这说明资金的均衡概率分布具有 Boltzmann-Gibbs 形式。进一步，从正则化条件$\int_{0}^{\infty} P(m) dm = 1$和$\int_{0}^{\infty} m P(m) dm = M/N$，我们得到$C = 1/ T_m$和$T_m = M/N$。因此经济系统的有效温度$T_m$是每位个体拥有的平均资金。
+			
+			实际上，如果我们类比热力学系统，定义出经济系统的熵
+			
+			\begin{equation}
+				S_m = - \int_{0}^{\infty} dm P(m) \ln P(m),  \label{eq18}
+			\end{equation}
+			
+			\vspace{1.5em}
+			
+			孤立经济系统平衡态的Boltzmann-Gibbs分布也可以通过资金守恒定律的约束下最大化\eqref{eq18}中的熵$S_m$来获得\cite{wannier1987statistical}。	
+	
+	
+		\subsection{计算机模拟}\label{subsec:simulation}
+	
+		为了确定理论得到的结果是否正确，我们进行了蒙特卡洛模拟。首先，设$N = 2K, K \in \mathbb{N}$为经济系统中的个体数量，$M$为系统的总资金量，在初始时，每个个体都拥有相同的资金量$M/N$，此时资金的概率分布为$P(m) = \delta(m - M/N)$。
+		
+		在任意时刻$t$，我们遵循以下步骤来模拟资金的流动： 首先将$N$个经济个体两两配对，然后在每一对中随机选择一方作为“赢家”（假设为个体$i$），另一方自然成为“输家”（假设为个体$j$），“输家”需要向“赢家”支付$\Delta m$的资金。如果“输家”拥有的资金$m_{i} < \Delta m$，那么本次交易取消；若“输家”拥有的资金$m_i$足够支付$\Delta m$的资金，那么交易成功。双方交易后的资金量$m_i^{'}$和$m_j^{'}$满足如下关系
+					
+
+		\begin{align}
+			m_i \rightarrow m_{i}^{'} &= m_i - \Delta m  \\
+			m_j \rightarrow m_{j}^{'} &= m_j + \Delta m.   \label{eq19}
+		\end{align}
+		
+		\vspace{1.5em}
+		
+		对于$\Delta m$的取值方式，我们使用了如下几种交易规则来对蒙特卡洛模拟进行限定：
+		
+		\begin{enumerate}[label=(\roman*)]
+		
+			\item 资金交换量为较小的一个常数$\Delta m = 1$
+			
+			\item 设定一个随机比例系数$0 \leq \nu \leq 1$，令$\Delta m = \nu (m_i + m_j)/2$
+			
+			\item 设定一个随机比例系数$0 \leq \nu \leq 1$，令$\Delta m = \nu M/N$
+		
+		\end{enumerate}
+		
+		事实上，以上三种交换规则再一定程度上是符合现实的，因为现实中的资金交换主要是用于购买商品或者某种服务的，而商品和服务的价格通常是确定的，不随购买者身份或者拥有资金的不同而改变。本文主要利用了第2条规则作为约束进行模拟，实际上孤立系统最终的平衡时的资金分布在以上三种规则的约束下是相同的\cite{dragulescu2000statistical}。
+		
+			\vspace{1.5em} 
+			
+			\begin{generalfig}[htb]{直方图和曲线: 资金平衡时的分布；双垂线: 资金初始分布 \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)}{fig:Isolated_Symmetry}
+				\includegraphics[width=0.9\textwidth]{Figures/Isolated_Symmetry.jpg}
+			\end{generalfig}
+			
+			\vspace{1.5em}  
+		
+		
+		在模拟中，当个体之间开始交换金钱，初始呈Delta函数形态的资金分布首先对称地扩散。然后，概率分布开始堆积在不可穿透的边界$m = 0$处；随后分布变得开始偏斜，并最终达到如图所示的指数分布形状。
+		
+	
+		\section{超越孤立系统}\label{sec:beyond_isolated}
+	
+		本文中的经济系统，可以视作一个国家，资金在一个国家内的个体，组织，公司之间流动。然而在现实社会中，一个国家不可能是孤立的经济系统，一方面，公民的出生与死亡，迁出与迁入，公司组织的成立与解散，都会改变一个国家内不经济个体的数目乃至整个系统的总资金量；另一方面，国家的贸易活动，商品和服务的出口和进口，都会改变一个国家整体的资金量。用物理的语言描述，国家这一庞大的系统可以与外界交换能量以及粒子数的，因此为了更贴合实际，我们需要讨论在开发系统中，资金分布的情况。然而，包括Yakovenko, V. M.在内的多数学者\cite{dragulescu2000statistical}\cite{ausloos2007model}\cite{chatterjee2006kinetic}仅仅将分析局限在孤立的经济系统中，即他们没有考虑系统可以与外界发生资金以及个体数量可以交换的情况。本文先从封闭系统入手，即从可以交换能量而不能交换粒子数的系统入手，再过渡到开放系统，模拟并研究这两类系统中资金的分布。
+
+	
+	
+			\subsection{封闭系统}
+	
+			首先我们进行蒙特卡洛模拟来显示封闭系统中资金分布随着时间的演化。我们在模拟孤立经济系统的使用的规则为基础，我们虚拟出了一个金库(Cash Reservoir)，相当于热力学中的热库(Thermal Reservoir)，与经济系统接触，使得原有的经济系统可以与金库交换资金量。我们假设金库的有效温度$T_m^{res}$远大于系统的有效温度$T_m^{sys}$。由于$T_m^{res} > T_m^{sys}$，因此在可以观测的有限时间内，系统能从金库持续的获取资金量，即系统有效温度持续上升。
+						
+			
+			
+			\begin{figure}[htbp]
+			\centering                                                 
+
+			\begin{minipage}[t]{0.49\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Closed_Symmetry500.jpg}               
+			\subcaption{Steps = 500}
+			\end{minipage}
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Closed_Symmetry1000.jpg}               
+			\subcaption{Steps = 1000}
+			\end{minipage}
+			
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Closed_Symmetry1500.jpg}               
+			\subcaption{Steps = 1500}
+			\end{minipage}
+
+			\caption{直方图和曲线: 资金平衡时的分布；双垂线: 资金初始分布 \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)} 
+			\label{fig:Closed_Symmetry}                                                        
+			\end{figure}
+
+		
+			具体而言，我们遵循以下步骤来模拟资金的在$t$时刻的交换和最后分布情况： 
+			
+			\begin{enumerate}
+			
+			\item 模拟系统中资金注入的情况：
+			
+				\begin{enumerate}[label=(\roman*)]
+			
+				\item 按均匀分布随机生成一个比例系数$\nu$，其中$\nu \in [0,1]$；
+				
+				\item 生成注入资金量$\Delta m_t$，其满足$\Delta m_t =  \frac{1}{100} * \nu * M_t $，其中$M_t$为t时刻系统总资金量；
+				
+				\item 在$N_t$个经济个体中随机选取$100$位个体，将资金量$\Delta m_t$等分100份注入到选中个体的资金中，更新系统中经济个体的资金列表；
+				
+				\end{enumerate}
+			
+			\item 模拟资金交换的情况：
+			
+				\begin{enumerate}[label=(\roman*)]
+				
+				\item 将$N$个经济个体两两配对，然后在每一对中随机选择一方作为“赢家”（假设为个体$i$），另一方自然成为“输家”（假设为个体$j$），“输家”需要向“赢家”支付$\Delta m$的资金；
+				
+				\item 如果“输家”拥有的资金$m_{i} < \Delta m$，那么本次交易取消，则$m_i^{'} = m_i$，$m_j^{'} = m_j$
+								
+				\item 若“输家”拥有的资金$m_i$足够支付$\Delta m$的资金，则交易成功，方的资金量更新为$m_i^{'} = m_i - \Delta m$和$m_j^{'} = m_j + \Delta m$；
+				
+				\end{enumerate}
+		
+			\end{enumerate}
+					
+					
+	
+			从\autoref{fig:Closed_Symmetry}中可以看出，当系统持续地引入外部的资金流时，尽管经济个体的资金分布无法达到平衡甚至稳态，但由于流入资金的速率远小于资金在个体之间交换的速率，在任意时期，个体的资金分布均能达到Boltzmann-Gibbs分布。不同的是，随着外部资金的不断注入，系统的有效温度$T_m^{sys} \sim M/N $不断上升，使得Boltzmann-Gibss分布曲线随着时间向右平移，同时曲线的曲率也随着有效温度$T_M^{sys}$的升高而下降。显然从直观来理解，这样的模拟结果是我符合我们理论的预期的。
+			
+			
+
+	
+			\subsection{开放系统}\label{subsec:opened_symmetry}
+		
+			在热物理中，开放系统指的是既能与外界交换能量，又能交换粒子数的系统，这样的系统没有任何边界。同样在经济系统中，我们规定开放系统指的是那些可以与外界其他系统交换资金量，经济个体数量也能改变的系统。
+
+			\begin{figure}[htbp]
+			\centering                                                 
+
+			\begin{minipage}[t]{0.49\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Opened_Symmetry_Both500.jpg}               
+			\subcaption{Steps = 500}
+			\end{minipage}
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Opened_Symmetry_Both1000.jpg}               
+			\subcaption{Steps = 1000}
+			\end{minipage}
+			
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Opened_Symmetry_Both1500.jpg}               
+			\subcaption{Steps = 1500}
+			\end{minipage}
+			\caption{图中展示的是允许经济个体双向流动，即允许经济个体进入系统或离开系统时，系统中资金随时间分布情况 \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)} 
+			\label{fig:Opened_Symmetry}                                                        
+			\end{figure}
+
+
+			同样，我们遵循以下步骤来模拟资金的在$t$时刻的交换和最后分布情况，整个过程分为三大步骤，其中两步与封闭系统的情形相同，唯一不同的是开放系统的引入了模拟系统中经济个体数量变动的情况，具体步骤如下：
+			
+			
+			
+			\begin{enumerate}
+		
+			\item 模拟系统中经济个体数量变动的情况：
+			
+				\begin{enumerate}[label=(\roman*)]
+				
+				\item 随机生成两个偶数$n_{t}^{in}$和$n_{t}^{out}$，两者满足$0<n_{t}^{in}, n_{t}^{out}<30$，其中$n_{t}^{in}$为$t$时刻迁入系统的经济个体数量，$n_{t}^{out}$则为迁出数量，并计算差值$\Delta n_{t} = n_{t}^{in} - n_{t}^{out}$；
+				
+				\item 若$\Delta n_{t} < 0$，则在$N_t$个经济个体中随机选取$ \lvert \Delta n_{t} \rvert $个移除出系统；
+				
+				\item 若$\Delta n_{t} > 0$，则系统新加入$\lvert \Delta n_{t} \rvert $个经济个体，其中每个个体所携带的资金量为t时刻人均资金量，即$M_t / N_t$；
+				
+				\end{enumerate}
+			
+			\item 模拟系统中资金注入的情况：
+			
+				\begin{enumerate}[label=(\roman*)]
+			
+				\item 按均匀分布随机生成一个比例系数$\nu$，其中$\nu \in [0,1]$；
+				
+				\item 生成注入资金量$\Delta m_t$，其满足$\Delta m_t =  \frac{1}{100} * \nu * M_t $，其中$M_t$为t时刻系统总资金量；
+				
+				\item 在$N_t$个经济个体中随机选取$100$位个体，将资金量$\Delta m_t$等分100份注入到选中个体的资金中，更新系统中经济个体的资金列表；
+				
+				\end{enumerate}
+			
+			\item 模拟资金交换的情况：
+			
+				\begin{enumerate}[label=(\roman*)]
+				
+				\item 将$N$个经济个体两两配对，然后在每一对中随机选择一方作为“赢家”（假设为个体$i$），另一方自然成为“输家”（假设为个体$j$），“输家”需要向“赢家”支付$\Delta m$的资金；
+				
+				\item 如果“输家”拥有的资金$m_{i} < \Delta m$，那么本次交易取消，则$m_i^{'} = m_i$，$m_j^{'} = m_j$
+								
+				\item 若“输家”拥有的资金$m_i$足够支付$\Delta m$的资金，则交易成功，方的资金量更新为$m_i^{'} = m_i - \Delta m$和$m_j^{'} = m_j + \Delta m$；
+				
+				\end{enumerate}
+			
+			\end{enumerate}
+		
+
+
+			
+			\begin{figure}[h]
+			\centering                                                 
+
+			\begin{minipage}[t]{0.45\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Opened_Symmetry_Add500.jpg}               
+			\subcaption{Flow In, Steps = 500}
+			\end{minipage}
+			\begin{minipage}[t]{0.45\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Opened_Symmetry_Drop500.jpg}               
+			\subcaption{Flow Out, Steps = 500}
+			\end{minipage}
+			
+			\begin{minipage}[t]{0.45\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Opened_Symmetry_Add1000.jpg}               
+			\subcaption{Flow In, Steps = 1000}
+			\end{minipage}
+			\begin{minipage}[t]{0.45\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Opened_Symmetry_Drop1000.jpg}               
+			\subcaption{Flow Out, Steps = 1000}
+			\end{minipage}
+			
+			\begin{minipage}[t]{0.45\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Opened_Symmetry_Add1500.jpg}               
+			\subcaption{Flow In, Steps = 1500}
+			\end{minipage}
+			\begin{minipage}[t]{0.45\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Opened_Symmetry_Drop1500.jpg}               
+			\subcaption{Flow Out, Steps = 1500}
+			\end{minipage}
+			\caption{左栏展示的是仅允许经济个体{\bfseries 流入}的情况下，系统中资金随时间分布情况；左栏展示的是仅允许经济个体{\bfseries 流出}的情况下，系统中资金随时间分布情况 \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)} 
+			\label{fig:Opened_Symmetry_AddDrop}                                                        
+			\end{figure}
+			
+			
+			模拟的结果如\autoref{fig:Opened_Symmetry}所示。乍一眼看，这样的分布显然不是Boltzmann分布，因为其于孤立系统和封闭系统的情况大为不同。事实上，从拟合结果来看，开放系统中的资金分布曲线是由两个水平对置的指数分布曲线构成，这从将频数取了对数的子图中更容易看出——两个斜率一正一负的直线。根据分布图，该系统应该有两个有效温度$T_m^{1}$和$T_m^{2}$，分别对应两个指数分布曲线，与此同时，这样的双指数曲线曲率随着时间推移而不断降低，且整体向右平移，这显然是由于资金的持续注入使得系统的有效温度$T_m^{1}$和$T_m^{2}$不断上升导致的。
+						
+			直觉告诉我们，这样特殊的分布情况于引入了经济个体流入和流出有关，因此，为了进一步探究经济个体的流入流出对自己分布的影响，下面我们将模型简化，排除了资金注入的影响，分别探究满足以下两种情况时资金的分布特征：1. 系统中经济个体数目不随时间减少（净流入）；2. 系统中经济个体数目不随时间增加（净流出）。
+
+			模拟结果如\autoref{fig:Opened_Symmetry_AddDrop}所示。可以看到，两种情况下系统的自己分布都呈现出孤立系统资金分布的特征，可能的原因是，在每个时间点$t$，新增或者离开的经济个体数量远小于系统的经济个体总量，通过个体之间的资金交换，系统在每一时间点$t$都能快速达到满足Boltzmann-Gibbs分布的平衡态，因此两种情况下的资金分布都与孤立系统的情形十分类似。这说明，资金分布呈现出Boltzmann-Gibbs分布的形态与系统本身是否是孤立或者开放系统无关，即——允许与外界进行资金和经济个体流动的系统依然可以达到指数分布。
+			
+			至于\autoref{fig:Opened_Symmetry}的情况，从直观来理解，反向的指数分布曲线可能是流出的个体的资金分布与流入的个体的资金分布相互耦合造成的，尽管同时考虑个体的流入流出所得到的自己分布曲线并不是单纯的指数分布，但资金分布曲线最终的形态是Boltzmann-Gibbs分布反向叠加构成的，属于Botlzmann-Gibbs分布的衍生品。另外，经反复模拟验证，造成这样的资金分布不仅与系统是否开放无关，且与模拟过程中具体的参数选取同样无关。事实上，决定系统资金分布是否为指数分布仅与资金交换的规则有关，我们将在下一章将进一步讨论。
+			
+	
+	
+	
+	
+	\newpage
+	
+	\section{Boltzmann-Gibbs分布与平衡态}\label{sec:time_symmetry}
+	
+	
+		我们先给出结论：Botlzmann-Gibbs分布的出现与资金的交换规则是否满足{\bfseries 时间反演对称性}有关。Boltzmann分布的实现与Boltzmann方程有关，下面我们类比气体动理学的Boltzmann动理方程来推到适合经济系统的Boltzmann方程，即确定资金分布函数$f(m)$的方程\cite{pitaevskii2012physical}。
+	
+		假设$f(t,m)$为资金空间的分布函数，当系统中的经济个体之间不发生资金交换，或者系统中资金的交换达到平衡时，有
+		
+		\begin{equation}
+			\frac{df}{dt} = 0 \label{eq19}
+		\end{equation}
+		
+		\vspace{1.5em}  
+		
+		当考虑资金交换时，且资金的交换无法达到平衡时，此时等式\eqref{eq19}不再成立，因为这种情况下的分布函数是时变的，因此动理方程应该写成
+		
+		\begin{equation}
+			\frac{df}{dt} = C(f) \label{eq20}
+		\end{equation}
+		
+		\vspace{1.5em}  
+
+		其中$C(f)$表示分布函数由于资金的交换引起的变化率，$dm \cdot C(f)$是资金空间间隔为$dm$的单位时间内由于资金交换引起的经济个体数量的改变量。$C(f)$在物理学中被称为碰撞积分，在这里我们姑且称其为交换积分。显然，只有我们确定了交换积分$C(f)$的具体形式吼，方程\eqref{eq20}才有实际意义。现在我们来讨论这个问题。
+		
+		当两个经济个体进行资金交换时，其资金量$m$会改变。因此，每个经济个体所经历的每次资金交换都会使它的资金量转移出给定的区间$dm$，这类资金的交换称为“损失”。具体而言，假设具有资金量为$m_1$或$m_2$的个体们发生资金交换，交换后的资金量变为$[m_1,m_2] \rightarrow [m_1^{'}, m_2^{'}]$，其中$m_1^{'}, m_2^{'} = m_1, m_2 \pm \Delta m$，那么发生资金交换的总个体数为下列积分：
+		
+		\begin{equation}
+			dm_1 dm_2 \int  w_{[m_1,m_2] \rightarrow [m_1^{'}, m_2^{'}]}  f_1 f_2 dm_1^{'} dm_2^{'}  \label{eq21}
+		\end{equation}
+		
+		\vspace{1.5em}  
+		
+		其中，系数$w$表征除资金量$m$外所有其他变量的函数。
+		
+		然而，在资金交换的过程中，有“损失”必然也会有“增益”。其结果使原先具有的资金量处于特定区间$dm$之外的经济个体进入到该区间。这一交换过程可以被记为$[m_1^{'},m_2^{'}] \rightarrow [m_1, m_2]$，此时通过资金交换进入$dm$区间的个体数量为：
+		
+		\begin{equation}
+			dm_1^{'} dm_2^{'}  \int  w_{[m_1^{'},m_2^{'}] \rightarrow [m_1, m_2]}^{'}  f_1^{'} f_2^{'}  dm_1 dm_2 \label{eq22}
+		\end{equation}
+		
+		\vspace{1.5em}  
+	
+	
+		将增益的经济个体数量减去损失的经济个体数量，我们得到单位时间在$dm$区间经济个体数的改变量为
+		
+		\begin{equation}
+			dm_1 dm_2 dm_1^{'} dm_2^{'} \int  ( w^{'} f_{1}^{'} f_{2}^{'} - w f_{1} f_{2} )   \label{eq23}
+		\end{equation}
+		
+		\vspace{1.5em}  
+		
+		因此，对先前提到的交换积分$C(f)$，我们有下列表达式：
+		
+		\begin{equation}
+			C(f) = dm_1 dm_2 dm_1^{'} dm_2^{'} \int  ( w^{'} f_{1}^{'} f_{2}^{'} - w f_{1} f_{2} )   \label{eq24}
+		\end{equation}
+		
+		\vspace{1.5em}  
+		
+		确定了碰撞积分的形式后，我们便可以将经济系统中的动理方程写成
+		
+		\begin{equation}
+			\frac{df}{dt} = dm_1 dm_2 dm_1^{'} dm_2^{'} \int  ( w^{'} f_{1}^{'} f_{2}^{'} - w f_{1} f_{2} )   \label{eq25}
+		\end{equation}
+		
+		\vspace{1.5em}  
+		
+		我们姑且可将其当成是适用于经济系统的Boltzmann方程。注意到，系统平衡时也应该满足\eqref{eq25}所示的动理方程，而平衡时系统中资金的统计分布$f(m)$是恒定的，因此平衡时方程\eqref{eq25}左边恒为零。那么，平衡状态时应该有
+		
+		\begin{equation}
+			C(f) = dm_1 dm_2 dm_1^{'} dm_2^{'} \int  ( w^{'} f_{1}^{'} f_{2}^{'} - w f_{1} f_{2} ) = 0  \label{eq26}
+		\end{equation}
+		
+		\vspace{1.5em}  
+		
+		然而上式这一条件还不足以说明资金的统计分布$f$服从Boltzmann-Gibbs分布。起关键性决定作用的约束条件与系数$w_{[m_1,m_2] \rightarrow [m_1 + \Delta m, m_2 - \Delta m]}$有关。系数$w$可以简单的理解为拥有资金$m_2$的个体向拥有资金$m_1$的个体交换$\Delta m$资金的速率，但其实系数$w$的含义更加宽泛，在本文中，系数$w$表征的是经济个体之间资金的交换方式，即\autoref{subsec:simulation}中$\Delta m$的取值方式。显然，如果资金的交换具有时间反演对称性，那么在经过正向交换和逆向交换后，两个经济个体最终所拥有的资金量应该与初始状态相同，即
+		
+		\begin{equation}
+			[m_1,m_2] \stackrel{w}{\longrightarrow} [m_1^{'}, m_2^{'}]  \stackrel{w^{'}}{\longrightarrow}   [m_1, m_2]  \label{eq27}
+		\end{equation}
+	
+		\vspace{1.5em} 
+		
+		这说明，如果模型中资金的交换具有时间反演对称性，造成“损失”的系数$w_{[m_1, m_2]\rightarrow[m_1^{'}, m_2^{'}]}$与带来“增益”的系数造成“损失”的系数$w^{'}_{ [m_1^{'}, m_2^{'}] \rightarrow [m_1, m_2] }$相同。那么方程\eqref{eq26}可改写为
+		
+		\begin{equation}
+			C(f) = dm_1 dm_2 dm_1^{'} dm_2^{'} \int  w ( f_{1}^{'} f_{2}^{'} -  f_{1} f_{2} ) = 0  \label{eq28}
+		\end{equation}
+		
+		\vspace{1.5em}  
+
+		我们可以拿掉积分符号，继续简化为
+		
+		\begin{equation}
+			f_{1}^{'}(m_1 + \Delta m) f_{2}^{'}(m_2 - \Delta m) -  f_{1}(m_1) f_{2}(m_2)  = 0  \label{eq29}
+		\end{equation}
+		
+		\vspace{1.5em}  
+
+		Boltzmann-Gibbs分布$f(m) = C \exp( - m /T)$正是上式\eqref{eq29}的解。这说明，当系统中个体的的资金交换方式满足时间反演对称性，系统达到平衡时的分布必为Boltzmann-Gibbs分布。
+		
+		下面我们来验证下\autoref{subsec:simulation}所提到的三种资金交换方式是否满足时间反演对称性。
+		
+		\begin{enumerate}[label=(\roman*)]
+		
+			\item 资金交换量为较小的一个常数$\Delta m = 1$ \label{item1}
+			
+			\item 设定一个随机比例系数$0 \leq \nu \leq 1$，令$\Delta m = \nu (m_i + m_j)/2$
+			
+			\item 设定一个随机比例系数$0 \leq \nu \leq 1$，令$\Delta m = \nu M/N$
+		
+		\end{enumerate}
+		
+		首先规则一和规则三显然满足时间反演对称性。对于规则二，假设geti$i$和个体$j$的资金量分别为$m_i$和$m_j$，那么$\Delta m = \nu (m_i + m_j) /2$，交换后两个个体的资金量为
+		
+		\begin{align}
+			m_i \rightarrow m_{i}^{'} &= m_i - \Delta m = m_i -  \nu (m_i + m_j) /2  \\
+			m_j \rightarrow m_{j}^{'} &= m_j + \Delta m = m_j + \nu (m_i + m_j) /2  \label{eq30}
+		\end{align}
+		
+		\vspace{1.5em} 
+		
+		此时若将时间反演，进行一次逆向交换，并注意到系数$\nu$是恒定的，那么$\Delta m^{'} = \nu(m_{i}^{'} + m_{j}^{'} )/2 = \nu (m_i + m_j) /2$，反演交换后的资金量分别为
+		
+		\begin{align}
+			m_i^{'} \rightarrow m_{i}^{''} &= m_i^{'} + \Delta m^{'} = m_i^{'} + \nu (m_i + m_j) /2  = m_i\\
+			m_j^{'} \rightarrow m_{j}^{''} &= m_j^{'} - \Delta m^{'} = m_j^{'} - \nu (m_i + m_j) /2  = m_j \label{eq31}
+		\end{align}
+		
+		\vspace{1.5em} 
+
+		由此可以看出，服从规则二的资金交换是满足时间反演对称性的。因此在这样的交换条件约束下，只要系统能达到平衡，资金分布必为Boltzmann-Gibbs分布。值得注意的是，尽管在理论力学中，时间反演对称性对应着能量守恒，而上述三种规则在交换过程中都能保证资金量的守恒，但我们无法仅凭这一点推断以上三种交易规则均满足时间反演对称性，因为时间反演对称性是能量守恒的充分非必要条件，具体的反例我们将在下一章看到。因此我们必须要通过严格的推导来证明上述交易规则确实满足时间反演对称性。
+		
+				
+		\autoref{sec:beyond_isolated}中所模拟的封闭系统和开放系统中的资金分布之所以能具有Boltzmann-Gibbs分布的形式，是因为资金和经济个体数在任意时刻$t$的改变量较小，或者说其改变速率远小于资金交换的速率，因此即使资金和经济个体数任意时刻$t$出现扰动，系统也能快速达到平衡。可以说\autoref{sec:beyond_isolated}中所模拟的结果说明，在资金和经济个体数改变速率远小于资金交换速率的情况下，封闭系统和开放系统在任意时刻均能达到准平衡态，因而资金分布函数$f(t,m)$具有Boltzmann-Gibb分布的形态，但值得注意的是$f(t,m)$依然是是时变的。
+		
+		
+
+
+		
+	\newpage	
+	
+	
+	\section{非Boltzmann-Gibbs分布的系统}\label{sec:non_boltzmann}
+	
+	\subsection{孤立系统}
+		
+	在明确了资金交换的时间反演对称性是Boltzmann-Gibbs分布的决定性因素后，我们来探究，当资金交换的规则不再满足时间反演对称性时，系统能否达到平衡，以及达到平衡时服从的是怎样的分布。
+	
+	\begin{generalfig}[htb]{当资金交换不再满足时间反演对称性时，孤立系统的资金呈现出正态分布，其中双垂线表示所有经济个体的初始资金分布$m_0 = M/N$ \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)}{fig:Isolated_Asymmetry}
+		\includegraphics[width=0.9\textwidth]{Figures/Isolated_Asymmetry.jpg}
+	\end{generalfig}
+		
+	
+	首先我们探究在孤立系统中的情况，同样我们还是利用蒙特卡洛模拟来可视化这一结果。我们设立这样的规则来打破资金交换中的时间反演对称性：将$N$个经济个体两两配对，然后在每一对中随机选择一方作为“赢家”（假设为个体$i$），另一方自然成为“输家”（假设为个体$j$），“输家”需要向“赢家”支付$\Delta m = \nu \cdot m_j$的资金，交换完成后，“赢家”具有的资金为$m_i^{'} = m_i + \Delta m = m_i + \nu m_j$，“输家”的资金则更新为$m_j^{'} = m_j - \Delta m  = (1 - \nu) m_j$。
+	
+	在孤立系统中的模拟情况如\autoref{fig:Isolated_Asymmetry}所示，显然不是我们之前见到的Boltzmann-Gibbs分布，而是一个均值为$M/N$的正态分布，且这样的分布随时间是稳定的，即$df/dt = 0$
+	
+	对于这样的结果，我们先来验证这一交易规则是否满足时间反演对称性。在已知$m_i^{'}$和$m_j^{'}$的情况下，将资金进行逆交换，此时经济个体$i$为“输家”，而经济个体$j$为“赢家”，则交易的资金量$\Delta m^{'} = \nu \cdot m_i^{'} = \nu m_i + \nu^{2} m_j$。反演交换后，两位经济个体的资金量为
+	
+	\begin{align}
+		m_i^{'} \rightarrow \bm{m_{i}^{''}} &= m_i^{'} - \Delta m^{'} = m_i^{'} - \nu m_i - \nu^{2} m_j  \\
+							     &= (m_i + \nu m_j) (1 - \nu) \neq \bm{m_i}  \\
+		m_j^{'} \rightarrow \bm{m_{j}^{''}} &= m_j^{'} + \Delta m^{'} = m_j^{'} + \nu m_i + \nu^{2} m_j \\
+							     &= (1 - \nu + \nu^{2}) m_j + \nu m_i \neq  \bm{m_j} \label{eq32}
+	\end{align}
+	
+	\vspace{1.5em} 
+	
+	显然这样的资金交换过程尽管满足了局域的资金守恒，但却破坏了时间反演对称性，而时间反演对称性是Boltzmann-Gibbs分布实现的{\bfseries 充分必要条件}。所以，在这样的约束条件下所能达到平衡一定不满足Boltzmann-Gibbs分布。接下来我们来看下开放系统的情况。
+	
+
+	\subsection{开放系统}\label{subsec:beyond_opened}
+
+		对于开放系统，我们的模拟过程与\autoref{subsec:opened_symmetry}的情况一样，唯一不同的是我们对资金交换的方式，也就是$\Delta m$的取值规则，破坏了其时间对称性。具体过程如下：
+		
+
+		\begin{enumerate}[label=(\roman*)]
+		
+			\item {\bfseries 模拟系统中经济个体数量变动的情况}：随机生成两个偶数$n_{t}^{in}$和$n_{t}^{out}$，两者满足$0<n_{t}^{in}, n_{t}^{out}<30$，其中$n_{t}^{in}$为$t$时刻迁入系统的经济个体数量，$n_{t}^{out}$则为迁出数量，并计算差值$\Delta n_{t} = n_{t}^{in} - n_{t}^{out}$；若$\Delta n_{t} < 0$，则在$N_t$个经济个体中随机选取$ \lvert \Delta n_{t} \rvert $个移除出系统；若$\Delta n_{t} > 0$，则系统新加入$\lvert \Delta n_{t} \rvert $个经济个体，其中每个个体所携带的资金量为t时刻人均资金量，即$M_t / N_t$；
+
+			
+			\item {\bfseries 模拟系统中资金注入的情况}： 按均匀分布随机生成一个比例系数$\nu$，其中$\nu \in [0,1]$；生成注入资金量$\Delta m_t$，其满足$\Delta m_t =  \frac{1}{100} * \nu * M_t $，其中$M_t$为t时刻系统总资金量； 在$N_t$个经济个体中随机选取$100$位个体，将资金量$\Delta m_t$等分100份注入到选中个体的资金中，更新系统中经济个体的资金列表；
+				
+			
+			\item {\bfseries 模拟资金交换的情况}： 将$N$个经济个体两两配对，然后在每一对中随机选择一方作为“赢家”（假设为个体$i$），另一方自然成为“输家”（假设为个体$j$），“输家”需要向“赢家”支付$\Delta m = \nu \cdot m_j$的资金；
+
+		\end{enumerate}
+		
+		\begin{figure}[htbp]
+			\centering                                                 
+
+			\begin{minipage}[t]{0.49\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Opened_Asymmetry500.jpg}               
+			\subcaption{Steps = 500}
+			\end{minipage}
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Opened_Asymmetry1000.jpg}               
+			\subcaption{Steps = 1000}
+			\end{minipage}
+			
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Opened_Asymmetry1500.jpg}               
+			\subcaption{Steps = 1500}
+			\end{minipage}
+
+			\caption{在开放系统中，由于资金的持续流入，正态分布曲线的均值不断增加，峰度也逐渐减小 \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)} 
+			\label{fig:Opened_Asymmetry}                                                        
+		\end{figure}
+
+
+		从\autoref{fig:Opened_Asymmetry}可以看出，破坏了时间反演对称性的开放系统中资金的分布依然是正态分布，只不过由于外部资金的不断注入导致资金分布是随时间变化的，具体体现在正态分布的均值$M_t/N_t$变大，其峰度下降，曲线变得平缓。从现实意义来看，这样的正态分布消除了贫困人口(资金$m=0$的经济个体数量为0)，同时中产阶级占了社会总人口的大多数(资金量取均值的经济个体数量最多)，且财富差距较小(最大资金量和最小资金量极差较小)。可以说，破坏了时间反演对称性的模型展现出的资金分布是一种社会所希冀的健康的财富分布状况，从后面一章我们看到，这一改变对建立公平有效的税收政策具有指导意义。
+
+
+
+
+	\newpage
+	
+	\section{税收模型}\label{sec:tax_model}
+	
+	本章，我们将分别展示两种税收机制，分别研究两种的税收模式对孤立系统和开放系统的资金分布的影响。
+	
+		\subsection{对每笔收入征税}
+		
+		\begin{figure}[htbp]
+			\centering                                                 
+			\begin{minipage}[t]{0.49\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Tax_Isolated_Symmetry500.jpg}               
+			\subcaption{Steps = 500}
+			\end{minipage}
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Tax_Isolated_Symmetry1500.jpg}               
+			\subcaption{Steps = 1500}
+			\end{minipage}
+			
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Tax_Isolated_Symmetry2500.jpg}               
+			\subcaption{Steps = 2500}
+			\end{minipage}
+
+			\caption{孤立系统：对每一笔收入征税 \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)} 
+			\label{fig:Tax_Isolated_Symmetry}                                                        
+		\end{figure}
+		
+		
+		第一种税收模式是对经济个体在每次交易中获得的收入征税，这一机制与现实中的个人所得税其实是一致的。同时我们还引入了收入再分配机制，在模拟过程中，我们将征收得到的总税额平均分配给系统中的所有个体。这一过程就好比国家将收到的税收投入国家的基础建设，医疗报销和教育领域，这些税收再投入是普惠的，每一个公民都能从中受益，因此我们在蒙特卡洛模拟中，将征得税收资金平均发放给所有个体这一措施是合乎实际与情理的。我们先来探究在孤立系统中，对每笔收入征税会对系统的资金分布产生什么影响。在任意时刻$t$，我们遵循以下步骤来模拟资金的流动：
+		
+		\begin{enumerate}[label=(\roman*)]
+			\item 首先将$2N$个经济个体两两配对，然后在每一对中随机选择一方作为“赢家”（假设为个体$i$），另一方自然成为“输家”（假设为个体$j$），两者拥有的初始资金量分别为$m_i$和$m_j$；
+			
+			\item 其次设置恒定的税收比例为$r=0.05$，在交易中的“输家”将会从其资金池中扣除$\Delta m$的资金，而由于税收的存在，赢家只会获得$ (1-r) \cdot \Delta m$的资金；
+			
+			\item 如果“输家”拥有的资金$m_{j} < \Delta m$，那么本次交易取消；若“输家”拥有的资金$m_j$足够支付$\Delta m$的资金，那么交易成功。为了方便计算，我们不失普遍意义地将每次交换的资金设置为$\Delta m =  1$；
+			
+			\item 最后，由于$2N$个经济个体同时进行配对交易，此时我们获得税收总额$M_t^{tax} = N \cdot r $，我们将税收施行再分配，将$M_t^{tax}$平均分配给$2N$个经济个体，因此无论是“赢家”还是“输家”，最后均会额外获得$M_t^{tax}/2N = 0.5r$的资金作为补偿；
+		
+		\end{enumerate}	
+		
+		\autoref{fig:Tax_Isolated_Symmetry}是按照上述规则，在孤立系统所模拟出的资金分布结果。我们看到，三幅图中资金的分布依然服从Boltzmann-Gibbs分布，且分布的形态不随时间所改变，这说明资金的分布可以达到统计平衡。这样的模拟结果与我们在\autoref{subsec:simulation}看到的情形保持一致。
+		
+		接下来我们将经济系统设置为开放的，假定其与一个有效温度非常高的金库相连接，使得不断有资金从金库流出，注入到我们所研究的资金系统中。另外我们允许经济个体的流动，即任意时刻$t$系统中都有经济个体的流入和流出。同样，蒙特卡洛模拟的步骤如下：
+		
+		\begin{enumerate}[label=(\roman*)]
+		
+			\item {\bfseries 模拟系统中经济个体数量变动的情况}：随机生成两个偶数$n_{t}^{in}$和$n_{t}^{out}$，两者满足$0<n_{t}^{in}, n_{t}^{out}<30$，其中$n_{t}^{in}$为$t$时刻迁入系统的经济个体数量，$n_{t}^{out}$则为迁出数量，并计算差值$\Delta n_{t} = n_{t}^{in} - n_{t}^{out}$；若$\Delta n_{t} < 0$，则在$N_t$个经济个体中随机选取$ \lvert \Delta n_{t} \rvert $个移除出系统；若$\Delta n_{t} > 0$，则系统新加入$\lvert \Delta n_{t} \rvert $个经济个体，其中每个个体所携带的资金量为t时刻人均资金量，即$M_t / N_t$；
+
+			
+			\item {\bfseries 模拟系统中资金注入的情况}： 按均匀分布随机生成一个比例系数$\nu$，其中$\nu \in [0,1]$；生成注入资金量$\Delta m_t$，其满足$\Delta m_t =  \frac{1}{100} * \nu * M_t $，其中$M_t$为t时刻系统总资金量； 在$N_t$个经济个体中随机选取$100$位个体，将资金量$\Delta m_t$等分100份注入到选中个体的资金中，更新系统中经济个体的资金列表；
+				
+			
+			\item {\bfseries 模拟资金交换的情况}： 首先将$2N$个经济个体两两配对，然后在每一对中随机选择一方作为“赢家”（假设为个体$i$），另一方自然成为“输家”（假设为个体$j$），两者拥有的初始资金量分别为$m_i$和$m_j$；其次设置恒定的税收比例为$r=0.05$，在交易中的“输家”将会从其资金池中扣除$\Delta m$的资金，而由于税收的存在，赢家只会获得$ (1-r) \cdot \Delta m$的资金；如果“输家”拥有的资金$m_{j} < \Delta m$，那么本次交易取消；若“输家”拥有的资金$m_j$足够支付$\Delta m$的资金，那么交易成功。为了方便计算，我们不失普遍意义地将每次交换的资金设置为$\Delta m =  1$； 最后，由于$2N$个经济个体同时进行配对交易，此时我们获得税收总额$M_t^{tax} = N \cdot r$，我们将税收施行再分配，将$M_t^{tax}$平均分配给$2N$个经济个体，因此无论是“赢家”还是“输家”，最后均会额外获得$M_t^{tax}/2N = 0.5r$的资金作为补偿；
+			
+		\end{enumerate}
+		
+		根据这样的规则，我们又得到如\autoref{fig:Tax_Opened_Symmetry}的结果。这里我们又看到了形如\autoref{subsec:opened_symmetry}开放系统的结果——资金分布曲线由两个水平对置的指数分布曲线构成，有两个有效温度$T_m^{1}$和$T_m^{2}$来描述这一系统的平均资金状况。同时我们从三幅图中可以看到，这样的双指数曲线形状随着时间推移逐渐变得平滑，且整体不断向右平移。这一切表现与\autoref{subsec:opened_symmetry}的情况如出一辙。
+				
+		\begin{figure}[htbp]
+			\centering                                                 
+			\begin{minipage}[t]{0.49\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Tax_Opened_Symmetry500.jpg}               
+			\subcaption{Steps = 500}
+			\end{minipage}
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Tax_Opened_Symmetry1500.jpg}               
+			\subcaption{Steps = 1500}
+			\end{minipage}
+			
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Tax_Opened_Symmetry2500.jpg}               
+			\subcaption{Steps = 2500}
+			\end{minipage}
+
+			\caption{开放系统：对每一笔收入征税 \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)} 
+			\label{fig:Tax_Opened_Symmetry}                                                        
+		\end{figure}
+		
+		
+		\autoref{fig:Tax_Isolated_Symmetry}和\autoref{fig:Tax_Opened_Symmetry}的结果与\autoref{fig:Isolated_Symmetry}和\autoref{fig:Opened_Symmetry}是如此的类似，这不禁让我们思考，这两类模型之间是否存在着关联。事实上，我们在之前论述过，只要系统中交换资金的方式满足时间反演对称性，那么资金的分布必定是Boltzmann-Gibbs分布。本节我们在基础的模型上添加了对收入税收和税收再分配这两项约束，我们将\label{subsec:tax_time_symmetry}在证明对收入征税的模型是否满足时间反演对称性。下一节我们探讨另一章税收模式对系统资金分布的影响。
+
+		
+	
+		\subsection{对总资产征税}
+			
+		从上一节我们看到，仅仅对收入征税，资金分布仍然服从Boltzmann-Gibbs分布或其衍生形态。然而对于一个发达的社会来说，Boltzmann-Gibbs分布并不是一种理想和健康的分布，因为这样的分布意味着社会中绝大多数人依然贫困(如\autoref{fig:Tax_Isolated_Symmetry}所示，资金量为$0$的经济个体数量最多)，而富裕人口的数量随着财富的增加呈指数级下降，极少数人口掌握着社会绝大多数的财富，这样的财富结构是极为不健康的，大部分个体是受剥削的。即便是如\autoref{fig:Tax_Opened_Symmetry}的开放系统中的结果，我们可以看到贫困人口(资金量为$0$)依然没有被彻底消除。因此从上一节例子可以看出，对收入征税然后实行均衡的再分配并不是理想的调整社会财富结构的机制。在本节，我们引入对总资产征税的机制，虽然这一可能机制较为偏激，对富裕阶层不利，但是对优化整个社会的财富结构十分有效。
+		
+		\begin{figure}[htbp]
+			\centering                                                 
+			\begin{minipage}[t]{0.49\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Tax_Isolated_Asymmetry500.jpg}               
+			\subcaption{Steps = 500}
+			\end{minipage}
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Tax_Isolated_Asymmetry1500.jpg}               
+			\subcaption{Steps = 1500}
+			\end{minipage}
+			
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Tax_Isolated_Asymmetry2500.jpg}               
+			\subcaption{Steps = 2500}
+			\end{minipage}
+
+			\caption{孤立系统：在$t$时刻对获得收入的经济个体的总资金量$m_t$征税 \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)} 
+			\label{fig:Tax_Isolated_Asymmetry}                                                        
+		\end{figure}
+		
+		对总资产征税模型与对收入征税模型有许多相似之处，不同之处就在于，在每一笔交易中，前者是对获得收入的经济个体的总资产征收一定比例的税，而后者仅对获得收入的经济个体的当下收入征税；至于收入再分配，两者均采用均衡分配的原则来实施。同样我们先来讨论孤立系统中的情况，在计算机模拟中，具体的步骤如下：
+		
+		\begin{enumerate}[label=(\roman*)]
+			\item 首先将$2N$个经济个体两两配对，然后在每一对中随机选择一方作为“赢家”（假设为个体$i$），另一方自然成为“输家”（假设为个体$j$），两者拥有的初始资金量分别为$m_i$和$m_j$；
+			
+			\item 其次设置恒定的税收比例为$r=0.05$，在交易中的“输家”将会从其资金池中扣除$\Delta m$的资金，而赢家获得$\Delta m$的资金的；
+			
+			\item 如果“输家”拥有的资金$m_{j} < \Delta m$，那么本次交易取消；若“输家”拥有的资金$m_j$足够支付$\Delta m$的资金，那么交易成功。为了方便计算，我们不失普遍意义地将每次交换的资金设置为$\Delta m =  \frac{1}{2} \nu (m_i + m_j)$；
+			
+			\item 在$2N$个经济个体完成配对交易后，我们对每一个经济个体都按照$r=0.05$的税率进行征税，此时我们获得税收总额$M_t^{tax} = r M$，我们将税收施行再分配，将$M_t^{tax}$平均分配给$2N$个经济个体，因此无论是“赢家”还是“输家”，最后均会额外获得$M_t^{tax}/2N$的资金作为补偿；
+			
+		\end{enumerate}
+		
+		
+		
+		模拟的结果如\autoref{fig:Tax_Isolated_Asymmetry}所示	，从这三幅图可以看出，孤立系统的资金分布$f(m)$服从均值为$M/N$的正态分布，且可以达到统计平衡，即分布$f(m)$是不显含时间的函数。社会的财富结构呈正态分布是令人讨喜的，因为这一分布说明社会的贫困人口(资金量为$0$的经济个体数量)完全被消除，且最富裕阶级与最贫困阶级的人口数量都很少，且社会最大财富和最少财富的极差远小于Boltzmann-Gibbs分布的情形，大部分经济个体达到中产阶级(资金量在平均值附近)。显然，呈正态分布的社会资金结构才是健康合理且公平的。
+		
+		
+		\begin{figure}[htbp]
+			\centering                                                 
+			\begin{minipage}[t]{0.49\textwidth}                                                      
+			\includegraphics[width=\textwidth]{Figures/Tax_Opened_Asymmetry500.jpg}               
+			\subcaption{Steps = 500}
+			\end{minipage}
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Tax_Opened_Asymmetry1500.jpg}               
+			\subcaption{Steps = 1500}
+			\end{minipage}
+			
+			\begin{minipage}[t]{0.49\textwidth}                 
+			\includegraphics[width=\textwidth]{Figures/Tax_Opened_Asymmetry2500.jpg}               
+			\subcaption{Steps = 2500}
+			\end{minipage}
+
+			\caption{开放系统：在$t$时刻对获得收入的经济个体的总资金量$m_t$征税 \\ ($M = 5 \times 10^5$, $N = 5000$, MaxSteps $= 2000$)} 
+			\label{fig:Tax_Opened_Asymmetry}                                                        
+		\end{figure}
+	
+		
+		
+		为了推广这一结论，使结论具有普遍意义，我们进一步研究开放系统的情况。我们还是引入系统与外部的资金交换和经济个体流动，具体方式如下：
+
+		
+		\begin{enumerate}[label=(\roman*)]
+		
+			\item {\bfseries 模拟系统中经济个体数量变动的情况}：随机生成两个偶数$n_{t}^{in}$和$n_{t}^{out}$，两者满足$0<n_{t}^{in}, n_{t}^{out}<30$，其中$n_{t}^{in}$为$t$时刻迁入系统的经济个体数量，$n_{t}^{out}$则为迁出数量，并计算差值$\Delta n_{t} = n_{t}^{in} - n_{t}^{out}$；若$\Delta n_{t} < 0$，则在$N_t$个经济个体中随机选取$ \lvert \Delta n_{t} \rvert $个移除出系统；若$\Delta n_{t} > 0$，则系统新加入$\lvert \Delta n_{t} \rvert $个经济个体，其中每个个体所携带的资金量为t时刻人均资金量，即$M_t / N_t$；
+
+			
+			\item {\bfseries 模拟系统中资金注入的情况}： 按均匀分布随机生成一个比例系数$\nu$，其中$\nu \in [0,1]$；生成注入资金量$\Delta m_t$，其满足$\Delta m_t =  \frac{1}{100} * \nu * M_t $，其中$M_t$为t时刻系统总资金量； 在$N_t$个经济个体中随机选取$100$位个体，将资金量$\Delta m_t$等分100份注入到选中个体的资金中，更新系统中经济个体的资金列表；
+				
+			
+			\item {\bfseries 模拟资金交换的情况}：首先将$2N$个经济个体两两配对，然后在每一对中随机选择一方作为“赢家”（假设为个体$i$），另一方自然成为“输家”（假设为个体$j$），两者拥有的初始资金量分别为$m_i$和$m_j$；其次设置恒定的税收比例为$r=0.05$，在交易中的“输家”将会从其资金池中扣除$\Delta m$的资金，而赢家获得$\Delta m$的资金的；如果“输家”拥有的资金$m_{j} < \Delta m$，那么本次交易取消；若“输家”拥有的资金$m_j$足够支付$\Delta m$的资金，那么交易成功。为了方便计算，我们不失普遍意义地将每次交换的资金设置为$\Delta m =  \frac{1}{2} \nu (m_i + m_j)$；在$2N$个经济个体完成配对交易后，我们对每一个经济个体都按照$r=0.05$的税率进行征税，此时我们获得税收总额$M_t^{tax} = r M$，我们将税收施行再分配，将$M_t^{tax}$平均分配给$2N$个经济个体，因此无论是“赢家”还是“输家”，最后均会额外获得$M_t^{tax}/2N$的资金作为补偿；
+			
+		\end{enumerate}
+		
+	
+
+		所得结果如\autoref{fig:Tax_Opened_Asymmetry}所示，资金依然是正态分布，这样的形式符合预期。与孤立系统不同的是，由于外部资金的注入，系统的有效温度$T_m$或者说平均资金量不断上升，使得正态分布曲线随时间向右平移，同时峰度不断下降。这时我们注意到，\autoref{fig:Opened_Asymmetry}和\autoref{fig:Tax_Opened_Asymmetry}的结果如出一辙。事实上他们本来也应该是相同的，因为对总资产征税这一附加条件同样破坏了时间反演对称性，与\autoref{subsec:beyond_opened}所述一致。我们将在下一节验证上述两种征税方式与时间反演对称性的关系。
+	
+	
+		\subsection{征税方式与时间反演对称性}\label{subsec:tax_time_symmetry}
+		
+		
+		先说明结论，对收入征税的模型是满足时间反演对称性的，而对总资产征税的模型破坏了时间反演对称性，这一结论可以从\autoref{fig:Tax_Isolated_Asymmetry}的Boltzmann-Gibbs分布和\autoref{fig:Tax_Opened_Asymmetry}的正态分布中直接得出。尽管如此，我们还是需要从模拟过程入手来严格验证两种税收模型是否满足时间反演对称性。
+		
+		首先，对于{\bfseries 收入征税模型}，我们仅以孤立系统为例，用以下表格来说明任意两个个体的资金在正向交换和时间反演交换后的变化情况。
+		
+		
+	\begin{generaltab}{收入征税模型时间反演对称性的验证}{tab:symmetry}
+		\begin{tabularx}{\textwidth}{CC}
+			\toprule
+			正向交换&时间反演\\
+			\midrule
+			$m_i \rightarrow m_i^{'} = m_i + (1-r) \Delta m + m_{tax}$ & $m_i^{'} \rightarrow m_i^{''} = m_i^{'} - \Delta m^{'} + m_{tax}^{'}$\\
+			$m_j \rightarrow m_i^{'} = m_j - \Delta m + m_{tax}$ & $m_j^{'} \rightarrow m_j^{''} = m_j^{'} + (1-r) \Delta m^{'} + m_{tax}^{'}$\\
+			$\Delta m = 1$ & $\Delta m^{'} = 1$  \\
+			$m_{tax} = 0.5 r$ & $m_{tax}^{'} = 0.5 r$ \\
+			\midrule
+			$m_i^{'} = m_i + 1 - 0.5 r$ & $m_i^{''} = m_i $ \\
+			$m_j^{'} = m_j - 1 + 0.5 r$ & $m_j^{''} = m_j $ \\
+			\bottomrule
+		\end{tabularx}
+	\end{generaltab}
+
+
+		由\autoref{tab:symmetry}可见，按照收入征税模型的规则将资金进行正向交换和反演交换后，最终，经济个体的拥有的资金与初始情况一致。这说明，仅仅个体的每笔收入征税，并没有破坏资金的流动时间反演对称性，进而没能改变的资金的Boltzmann-Gibbs分布，所以我们得出结论，仅仅对收入征税，不能起到优化社会财富公平合理分配的作用。
+		
+		我们再来看{\bfseries 资产征税模型}的情况，在孤立系统中，资金的流动过程如\autoref{tab:Asymmetry}所示。显然，资产征税模型中的资金流动不满足时间反演对称性。而正是因为破坏了这一对称性，使得资金的分布不再是传统的Boltzmann-Gibbs分布，而变成了更均衡合理的正态分布。可以说，资产征税模型正是我们在\autoref{sec:non_boltzmann}讨论的非Boltzmann-Gibbs分布的一个实例。显然，{\bfseries 资产征税模型}的资金分布结构较{\bfseries 收入征税模型}更加公平与合理，前者彻底消除了贫困，拉近了富裕阶层和贫困阶层的距离，这样的财富结构十分有利于国家发展和社会稳定，是发达社会的理想状态。尽管前者的征税模式从当下的观点来看比较激进且具体实现起来比较困难——对所有人的资产直接征税后施行收入再分配，但仍然具有一定的指导意义，给我们优化国家社会的财富结构提供了新的方向。
+		
+	\begin{generaltab}{资产征税模型时间反演对称性的验证}{tab:Asymmetry}
+		\begin{tabularx}{\textwidth}{CC}
+			\toprule
+			正向交换&时间反演\\
+			\midrule
+			$m_i \rightarrow m_i^{'} = (1-r) m_i +  \Delta m + m_{tax}$ & $m_i^{'} \rightarrow m_i^{''} = (1-r) m_i^{'} - \Delta m^{'} + m_{tax}^{'}$\\
+			$m_j \rightarrow m_i^{'} = (1-r) m_j - \Delta m + m_{tax}$ & $m_j^{'} \rightarrow m_j^{''} = (1-r) m_j^{'} + \Delta m^{'} + m_{tax}^{'}$\\
+			$\Delta m = \frac{\nu}{2} (m_i + m_j) $ & $\Delta m^{'} = \frac{\nu}{2} (m_i^{'} + m_j^{'}) $  \\
+			$m_{tax} = r M / 2N = \mathbb{C} $ & $m_{tax}^{'} = r M / 2N = \mathbb{C} $ \\
+			\midrule
+			$m_i^{'} = (1-r) m_i + \Delta m + \mathbb{C} $ & $m_i^{''} =  (1-r) m_i + r \Delta m + (2 - \nu)  \mathbb{C} \neq m_i$ \\
+			$m_j^{'} = (1-r) m_j - \Delta m + \mathbb{C}$ & $m_j^{''} = (1-r) m_j - r \Delta m + (2 + \nu) \mathbb{C} \neq m_j$ \\
+			\bottomrule
+		\end{tabularx}
+	\end{generaltab}
+	
+	
+	
+	\newpage
+
+	\section{总结}
+
+	本文首先类比了孤立系统中资金交换与理想气体分子碰撞之间的相似性，然后通过理论推导和模拟指出孤立系统中的资金同样满足Boltzmann-Gibbs分布出发，其次将统计力学理论应用的范围推广到了开放系统这一更加贴合实际情况的情形，然后通过建立经济系统中的Botlzmann方程来证明Boltzmann-Gibbs分布与时间反演对称性的关系，最后提出了收入征税和资产征税这两种税收模型，为现实社会中的财富结构优化提供了新的方向。在整篇论文中，我们在模拟资金交换的时候都引入了一些随机性，但实际上在传统的经济学领域中，经济个体并不是随机的配对交换资金，而是遵循某些既定的策略，比如最大化效用函数等\cite{Simon1999}。然而在这类研究中的策略与理论力学中的最小作用量与热力学中的最大化熵有着异曲同工之妙，因此这就是我们也可以用物理学中的统计平衡来研究经济学领域的均衡概念。当然我们并不认为现实中的经济系统总是处于平衡状态，事实上，我们周围的大多数物理世界也没有 达到真正的平衡。尽管如此，统计平衡的概念对于研究非平衡现象是一个非常有用的切入点。
+
+	\newpage
+
+	
+	\begin{thankpage}
+	
+	首先要感谢的是吕京涛老师，他作为我的毕业论文导师，在我选题、立论、研究以及完成论文时提供的指导和帮助，以及在我申请国外研究生时为我写了推荐信，在这里千言万语无法表达对吕老师的感激之情。再次要感谢的是我的女朋友李佳洁，本科一路走来我们在学习和生活上互相帮助互相支持，她为我未来的发展和选择提出了许多意见，同时也在我申请国外研究生项目的时候帮助了我很多，感谢的话不用多说，相信我们能一直走下去的。还要感谢的是我的同学室友，本科四年我们同住一个屋檐下，无论是学习还是生活都对我帮助很大，他们身上有许多优点都值得我学习，我在与他们相处的过程中收获很多，四年下来在学业和为人处事有了不少的长进，感谢他们本科阶段的关心和照顾。最后要感谢，也是最该感谢的是我的父母，从小学到大学，他们含辛茹苦将我培育成人，在时间精力和金钱上都付出很多，只为让我能按自己的意愿的成为我自己，父母之恩无以言报，这样的恩情是无法用任何度规来衡量的。随着我求学之路地不断前行，与他们的距离也越来越远，希望我将来尽可能的把握机会陪陪他们，不做后悔的事情。
+	
+	最后的最后，作为一名中国共产党党员，感谢党组织四年以来的培养和教导，在将来我定不辱使命，努力成为优秀党员，为党的事业奋斗终身！
+
+
+	\end{thankpage}
+	
+
+	\newpage
+	
+	
+	%生成参考文献
+	%使用方法：\bibliography{参考文件1文件名, 参考文献2文件名, ...}
+	\bibliography{Thesis}
+	
+
+	
+\end{document}
